@@ -1,4 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { localCache } from '@/utils/cache';
+import { CACHE_TOKEN } from '@/global/constants';
 
 
 // 路由配置示例
@@ -18,10 +20,12 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 import home from './modules/home';
 import personalCenter from './modules/personalCenter';
+import materialMarket from './modules/materialMarket';
 
 export const routeList = [
   ...home,
-  ...personalCenter
+  ...personalCenter,
+  ...materialMarket
 ]
 
 const router = createRouter({
@@ -40,6 +44,12 @@ const router = createRouter({
       children: routeList
     }
   ]
+})
+
+router.beforeEach((to) => {
+  if (to.path !== '/login' && !localCache.getItem(CACHE_TOKEN)) {
+    return '/login'
+  }
 })
 
 export default router

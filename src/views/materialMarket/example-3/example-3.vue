@@ -1,8 +1,7 @@
-<script setup>
-</script>
+<script setup></script>
 
 <template>
-  <div class="main-area">
+  <div class="example-3">
     <RouterView v-slot="{ Component }">
       <transition name="fade">
         <component :is="Component"></component>

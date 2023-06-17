@@ -12,6 +12,7 @@ import vitePluginVersion from './vitePlugin/vite-plugin-version';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/demo',
   plugins: [
     vue(),
     vueJsx(),

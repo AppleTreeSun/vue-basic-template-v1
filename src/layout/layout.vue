@@ -2,6 +2,17 @@
 import HeaderArea from './components/HeaderArea.vue'
 import AsideArea from './components/AsideArea.vue'
 import MainArea from './components/MainArea.vue'
+
+const route = useRouter()
+
+// 每次刷新页面回到顶部
+watch(
+  () => route,
+  () => {
+    const scrollWrap = document.querySelector('#global-scroll-wrap')
+    scrollWrap && scrollWrap.scroll({ top: 0 })
+  }
+)
 </script>
 
 <template>
@@ -9,8 +20,14 @@ import MainArea from './components/MainArea.vue'
     <HeaderArea />
     <div class="container-wrap">
       <AsideArea />
-      <MainArea />
+      <MainArea id="global-scroll-wrap" />
     </div>
+    <el-backtop
+      :right="30"
+      :bottom="30"
+      target="#global-scroll-wrap"
+      style="color: #0052d9"
+    ></el-backtop>
   </div>
 </template>
 
@@ -25,7 +42,6 @@ import MainArea from './components/MainArea.vue'
 
   .container-wrap {
     height: calc(100vh - 70px);
-
     display: flex;
 
     .aside-area {
@@ -34,6 +50,7 @@ import MainArea from './components/MainArea.vue'
 
     .main-area {
       flex: 1;
+      overflow-y: auto;
     }
   }
 }

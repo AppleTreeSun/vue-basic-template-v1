@@ -1,5 +1,9 @@
 <script setup>
 import { routeList } from '@/router'
+import { localCache } from '@/utils/cache'
+import { CACHE_USER_INFO } from '@/global/constants'
+
+const userInfo = ref(localCache.getItem(CACHE_USER_INFO))
 
 import avatar from '@/assets/image/common/logo.svg'
 
@@ -10,6 +14,12 @@ const navList = routeList.filter((item) => item.meta?.menuVisible)
 
 const handleRouterPush = (item) => {
   router.push(item.path)
+}
+
+const handleExit = () => {
+  localCache.clear()
+  location.reload()
+  location.href = `${window.location.pathname}#/login`
 }
 </script>
 
@@ -34,9 +44,16 @@ const handleRouterPush = (item) => {
     </div>
     <div class="user-area">
       <el-avatar class="avatar" size="small" :src="avatar"></el-avatar>
-      <div class="user-name">{{ '未知用户' }}</div>
-      <div class="line">|</div>
-      <div class="status">登录</div>
+      <!-- <div class="user-name">{{ '未知用户' }}</div>
+      <div class="line">|</div> -->
+      <el-dropdown>
+        <div class="status">{{ userInfo.realName }}</div>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="handleExit"> 退出 </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
     </div>
   </div>
 </template>
@@ -80,10 +97,10 @@ const handleRouterPush = (item) => {
       height: 100%;
       line-height: 70px;
       color: #ddd;
-      padding: 0 10px;
+      padding: 0 15px;
       cursor: pointer;
       transition: all 0.2s linear;
-      margin: 0 3px;
+      margin: 0 10px;
 
       &.active {
         color: #fff;
@@ -104,6 +121,7 @@ const handleRouterPush = (item) => {
     justify-content: flex-end;
     align-items: center;
     padding-right: 10px;
+    margin-right: 10px;
     width: 250px;
     color: #fff;
     cursor: pointer;
@@ -114,6 +132,10 @@ const handleRouterPush = (item) => {
 
     .line {
       margin: 0 5px;
+    }
+    .status {
+      padding: 0 5px;
+      color: #fff;
     }
   }
 }
