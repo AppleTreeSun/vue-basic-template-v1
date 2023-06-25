@@ -1,6 +1,8 @@
 <script setup>
 import { ElMessage } from 'element-plus'
 
+const router = useRouter()
+
 defineProps({
   tableHeight: Number
 })
@@ -40,6 +42,22 @@ const onDisable = () => {
 // 启用 按钮事件逻辑
 const onEnable = () => {
   ElMessage('批量启用 功能建设中')
+}
+
+const onDetail = () => {
+  const name = 'example-1-detail'
+
+  const query = {
+    name: 'Coderzhr',
+    age: 18
+  }
+
+  const url = router.resolve({
+    name,
+    query
+  }).href
+
+  window.open(url)
 }
 
 const onSizeChange = () => {}
@@ -137,7 +155,7 @@ const onCurrentChange = () => {}
         <el-table-column label="操作" align="left" width="160" fixed="right">
           <template #default>
             <div class="control">
-              <el-button link style="color: #0052d9" size="small">详情</el-button>
+              <el-button link style="color: #0052d9" size="small" @click="onDetail">详情</el-button>
               <el-button link style="color: #0052d9" size="small">编辑</el-button>
               <el-button link style="color: #f56c6c" size="small">删除</el-button>
             </div>

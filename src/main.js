@@ -3,6 +3,8 @@ import { createPinia } from 'pinia'
 
 import '@/assets/css/index.less'
 
+import { preventClick } from '@/global/directives';
+
 
 
 import App from './App.vue'
@@ -18,6 +20,8 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
+
+app.use(preventClick, { wait: 300 })
 
 app.use(ElementPlus)
 

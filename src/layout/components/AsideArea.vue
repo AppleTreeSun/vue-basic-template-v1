@@ -1,4 +1,5 @@
 <script setup>
+import { hasPermission } from '@/utils/system';
 const route = useRoute()
 const router = useRouter()
 
@@ -7,7 +8,14 @@ const subList = ref([])
 watch(
   () => route.path,
   () => {
-    subList.value = route.matched[1].children
+    subList.value = route.matched[1]?.children.filter((item) => {
+      // 1.没有menuVisible不显示
+      if (!item.meta.menuVisible) return false
+      // 2.没有permission默认显示
+      if (!item.meta.permission) return true
+      // 3.有permission去判断权限
+      return hasPermission(item.meta.permission)
+    })
   },
   {
     immediate: true

@@ -18,6 +18,8 @@ const loginData = reactive({
   code: ''
 })
 
+const loading = ref(false)
+
 const verifyCode = ref('')
 const verifyImg = ref('')
 
@@ -25,6 +27,7 @@ const handleLogin = () => {
   loginFormRef.value.validate(async (valid) => {
     if (valid) {
       try {
+        loading.value = true
         const params = {
           username: crypto.encryptByAES(loginData.username),
           password: crypto.encryptByDES(loginData.password),
@@ -34,7 +37,9 @@ const handleLogin = () => {
         await userStore.loginAction(params)
         router.push('/')
       } catch (error) {
-        console.log(error);
+        console.log(error)
+      } finally {
+        loading.value = false
       }
     }
   })
@@ -120,7 +125,7 @@ const rules = {
               </template>
             </el-input>
           </el-form-item>
-          <el-button type="primary" style="width: 100%" @click="handleLogin"
+          <el-button type="primary" style="width: 100%" @click="handleLogin" :loading="loading"
             >登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</el-button
           >
         </el-form>

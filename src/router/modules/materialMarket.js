@@ -33,6 +33,15 @@ export default [
         },
       },
       {
+        path: '/material-market/example-1-detail',
+        name: 'example-1-detail',
+        component: () => import('@/views/materialMarket/example-1/detail.vue'),
+        meta: {
+          title: '示例-1-详情',
+          activePath: '/material-market'
+        },
+      },
+      {
         path: '/material-market/example-2',
         name: 'example-2',
         component: () => import('@/views/materialMarket/example-2/example-2.vue'),

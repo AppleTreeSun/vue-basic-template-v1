@@ -2,15 +2,21 @@
 import HeaderArea from './components/HeaderArea.vue'
 import AsideArea from './components/AsideArea.vue'
 import MainArea from './components/MainArea.vue'
+import { nextTick } from 'vue'
 
-const route = useRouter()
+const route = useRoute()
 
 // 每次刷新页面回到顶部
 watch(
-  () => route,
+  () => route.path,
   () => {
-    const scrollWrap = document.querySelector('#global-scroll-wrap')
-    scrollWrap && scrollWrap.scroll({ top: 0 })
+    nextTick(() => {
+      const scrollWrap = document.querySelector('#global-scroll-wrap')
+      scrollWrap && scrollWrap.scroll({ top: 0 })
+    })
+  },
+  {
+    deep: true
   }
 )
 </script>
@@ -43,6 +49,7 @@ watch(
   .container-wrap {
     height: calc(100vh - 70px);
     display: flex;
+    overflow: hidden;
 
     .aside-area {
       width: 200px;
