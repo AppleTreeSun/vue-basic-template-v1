@@ -23,10 +23,12 @@ const defaultConfig = {
 
 const config = reactive({ ...defaultConfig, ...props.configInfo });
 
+// 外部表单检验之后借组件实例回调
 function verify(value = '') {
   return value.toUpperCase() === config.identifyCode.toUpperCase();
 }
 
+// 外部借组件实例回调
 function refreshCode() {
   config.identifyCode = '';
   makeCode();

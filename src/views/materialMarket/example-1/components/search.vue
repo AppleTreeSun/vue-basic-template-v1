@@ -1,6 +1,6 @@
 <script setup>
 import statuIcon from '@/assets/image/materialMarket/sq.svg'
-import { nextTick } from 'vue';
+import { nextTick } from 'vue'
 
 const emit = defineEmits(['onFold', 'onSearch'])
 
@@ -73,40 +73,40 @@ onMounted(() => {
       <div class="search-left" :style="{ width: formWidth + 'px' }">
         <el-form label-width="90" :inline="true" :model="formInline" size="small">
           <el-form-item label="目录名称">
-            <el-input class="item-operate" v-model="formInline.mlmc" placeholder="" />
+            <el-input v-model="formInline.mlmc" placeholder="" />
           </el-form-item>
           <el-form-item label="国家级共享">
-            <el-select class="item-operate" v-model="formInline.gjjgx" placeholder="">
+            <el-select v-model="formInline.gjjgx" placeholder="">
               <el-option label="选项A" value="shanghai" />
               <el-option label="选项B" value="beijing" />
             </el-select>
           </el-form-item>
           <el-form-item label="省级共享">
-            <el-select class="item-operate" v-model="formInline.sjgx" placeholder="">
+            <el-select v-model="formInline.sjgx" placeholder="">
               <el-option label="选项A" value="shanghai" />
               <el-option label="选项B" value="beijing" />
             </el-select>
           </el-form-item>
           <el-form-item label="部门共享">
-            <el-select class="item-operate" v-model="formInline.bmgx" placeholder="">
+            <el-select v-model="formInline.bmgx" placeholder="">
               <el-option label="选项A" value="shanghai" />
               <el-option label="选项B" value="beijing" />
             </el-select>
           </el-form-item>
           <el-form-item label="资源类型">
-            <el-select class="item-operate" v-model="formInline.zylx" placeholder="">
+            <el-select v-model="formInline.zylx" placeholder="">
               <el-option label="选项A" value="shanghai" />
               <el-option label="选项B" value="beijing" />
             </el-select>
           </el-form-item>
           <el-form-item label="共享交换系统">
-            <el-select class="item-operate" v-model="formInline.gxjhxtdbml" placeholder="">
+            <el-select v-model="formInline.gxjhxtdbml" placeholder="">
               <el-option label="选项A" value="shanghai" />
               <el-option label="选项B" value="beijing" />
             </el-select>
           </el-form-item>
           <el-form-item label="状态">
-            <el-select class="item-operate" v-model="formInline.zt" placeholder="">
+            <el-select v-model="formInline.zt" placeholder="">
               <el-option label="选项A" value="shanghai" />
               <el-option label="选项B" value="beijing" />
             </el-select>
@@ -118,8 +118,7 @@ onMounted(() => {
         <el-button size="small" @click="onReset">重置</el-button>
         <el-button size="small" @click="onFoldChange" v-if="rowMax <= itemCount">
           <template #icon>
-            <el-image :src="statuIcon" :class="isFold ? 'zd' : 'zk'"></el-image>
-          </template
+            <el-image :src="statuIcon" :class="isFold ? 'zd' : 'zk'"></el-image> </template
         ></el-button>
       </div>
     </div>
@@ -145,8 +144,12 @@ onMounted(() => {
         .el-form-item {
           margin-right: 24px;
         }
-        .item-operate {
+        :deep(.el-form-item__content) {
           width: 200px;
+
+          > div {
+            width: 100%;
+          }
         }
       }
     }

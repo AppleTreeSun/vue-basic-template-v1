@@ -1,6 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { localCache } from '@/utils/cache';
 import { CACHE_TOKEN } from '@/global/constants';
+// 引入NProgress
+import NProgress from 'nprogress'
+// 引入nprogress样式文件
+import 'nprogress/nprogress.css'
+
+NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
+
 
 
 // 路由配置示例
@@ -50,6 +57,12 @@ router.beforeEach((to) => {
   if (to.path !== '/login' && !localCache.getItem(CACHE_TOKEN)) {
     return '/login'
   }
+
+  NProgress.start()
+})
+
+router.afterEach((to, from) => {
+  NProgress.done()
 })
 
 export default router
