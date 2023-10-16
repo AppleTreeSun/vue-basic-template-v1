@@ -7,11 +7,11 @@ import { ref } from 'vue';
 
 export const useSystemStore = defineStore('system', () => {
 
-  const dic = ref([])
+  const dic = ref(localCache.getItem(CACHE_DIC) ?? [])
 
-  const org = ref([])
+  const org = ref(localCache.getItem(CACHE_ORG) ?? [])
 
-  const area = ref([])
+  const area = ref(localCache.getItem(CACHE_AREA) ?? [])
 
   async function systemInitAction() {
 

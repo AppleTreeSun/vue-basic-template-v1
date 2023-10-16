@@ -13,8 +13,8 @@ const router = useRouter()
 const loginFormRef = ref()
 
 const loginData = reactive({
-  username: '',
-  password: '',
+  username: 'admin',
+  password: '123456',
   code: ''
 })
 
@@ -99,7 +99,7 @@ const rules = {
           <el-form-item prop="username">
             <el-input
               :prefix-icon="User"
-              placeholder="请输入用户名"
+              placeholder="用户名"
               v-model="loginData.username"
             ></el-input>
           </el-form-item>
@@ -122,6 +122,7 @@ const rules = {
             >
               <template #append>
                 <img class="verifyCode" @click="getCaptcha" :src="verifyImg" alt="" />
+                <!-- <Captcha /> -->
               </template>
             </el-input>
           </el-form-item>

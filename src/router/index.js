@@ -28,10 +28,12 @@ NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
 import home from './modules/home';
 import personalCenter from './modules/personalCenter';
 import materialMarket from './modules/materialMarket';
+import dataStatistics from './modules/dataStatistics';
 
 export const routeList = [
   ...home,
   ...personalCenter,
+  ...dataStatistics,
   ...materialMarket
 ]
 
